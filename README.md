@@ -1,4 +1,4 @@
-### simple
+# simple
 an attempt to make an electron based chromeapp-like base
 * favicon for icon
 * togglable drag bar (alt key)
