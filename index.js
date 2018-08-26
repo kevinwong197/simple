@@ -24,6 +24,9 @@ function createWindow(urlstr) {
     slashes: true
   }))
   win.webContents.executeJavaScript(`loadurl("${urlstr}")`);
+  win.on('closed', function () {
+    win = null;
+  })
   return win;
 }
 
@@ -34,9 +37,7 @@ function mogrify(path, callback) {
 }
 
 function setWinIcon(win, path) {
-  if(win) {
-    win.setIcon(nativeImage.createFromPath(path));
-  }
+  win && win.setIcon(nativeImage.createFromPath(path));
 }
 
 app.on('ready', () => {
