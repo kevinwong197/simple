@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	 <head>
+			<title>simple</title>
+
+			<style>
+				html, body {
+			    width: 100vw;
+			    height: 100vh;
+			    margin: 0;
+			    padding: 0;
+			    overflow: hidden;
+				}
+				webview {
+			    display: block;
+			    border: none;
+			    top: 0px;
+			    left: 0px;
+			    margin: 0;
+			    padding: 0;
+			    height: 100vh;
+			    width: 100vw;
+				}
+	      .electron-drag-overlay {
+	        right: 3px;
+	        left: 3px;
+	        height: 50px;
+	        width: auto;
+	        position: absolute;
+	        z-index: 10000000;
+	        -webkit-app-region: drag;
+	        transition: top 0.5s;
+	      }
+	      .electron-drag-visual {
+	        right: 3px;
+	        left: 3px;
+	        height: 50px;
+	        width: auto;
+	        position: fixed;
+	        z-index: 1000000;
+	        background: #222222;
+	        color: #F3F3F3;
+	        line-height: 50px;
+	        text-align: center;
+	        font-weight: bold;
+	        font-size: 2rem;
+	        transition: top 0.5s;
+	      }
+			</style>
+	 </head>
+	 
+	 <body>
+	 		<!--
+	 		-webkit-app-region would behave oddly when parent is scrollable
+	 		(absolute and fixed behaviors seems to be inverted), below code
+	 		is not necessary in current scenario but I'll keep it this way just in case
+	 		-->
+	 		<div class="electron-drag-overlay" id="electron-drag-overlay" style="top: -50px">
+	 		</div>
+	 		<div class="electron-drag-visual" id="electron-drag-visual" style="top: -50px">
+	 			drag
+	 		</div>
+	 		<script>
+	      let toggleOverlay = function () {
+	        let topv = document.getElementById("electron-drag-overlay").style.top;
+	        if (topv !== "-50px") {
+	          document.getElementById("electron-drag-overlay").style.top = "-50px";
+	          document.getElementById("electron-drag-visual").style.top = "-50px";
+	        } else {
+	          document.getElementById("electron-drag-overlay").style.top = "3px";
+	          document.getElementById("electron-drag-visual").style.top = "3px";
+	        }
+	      }
+
+	      let loadurl = function (urlstr) {
+					const webview = document.getElementById('webview')
+	      	webview.src = urlstr;
+					webview.shadowRoot.getElementById('browser-plugin-1').style.height = "100%";
+					webview.shadowRoot.getElementById('browser-plugin-1').style.width = "100%";
+	      }
+	 		</script>
+			<webview id="webview"
+				src="about:blank"
+				blinkfeatures="OverlayScrollbars"
+				webpreferences="nativeWindowOpen=true" allowpopups>
+			</webview>
+	 </body>
+</html>

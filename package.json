@@ -1,0 +1,22 @@
+{
+  "name": "simple",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/.bin/electron.cmd .",
+    "build": "electron-packager . simple --icon=resources/default.ico --extra-resource=resources/default.ico --extra-resource=resources/mogrify.exe --extra-resource=resources/index.html --overwrite",
+    "postinstall": "./node_modules/.bin/electron-rebuild.cmd"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^2.0.8",
+    "electron-packager": "^12.1.1",
+    "electron-rebuild": "^1.8.2"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "tmp": "0.0.33"
+  }
+}
